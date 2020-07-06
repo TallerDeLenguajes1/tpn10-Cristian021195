@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -28,17 +28,19 @@ namespace MorseSound
                     Console.WriteLine(input);
                     //funcion 1
                 }
-                else if(cond == 2){ //B:\C#\TRABAJOS PRACTICOS\tpn10-2\MorseSound\bin\Debug\TXT
+                else if(cond == 2){ 
                     GeneradorTXT.generar(input);
+                    morse = mostrar(ruta);
                 }
                 else if (cond == 3)
-                { //B:\C#\TRABAJOS PRACTICOS\tpn10-2\MorseSound\bin\Debug\TXT
+                {
+                    morse = mostrar(ruta);
                     Console.WriteLine("Ingrese el indice del listado para convertir dicho codigo morse a audio: ");
                     Indice = Convert.ToInt32(Console.ReadLine());
                     GeneradorMP3.crearAudio(Indice, morse);
                 }
                 else if (cond == 4)
-                { //B:\C#\TRABAJOS PRACTICOS\tpn10-2\MorseSound\bin\Debug\TXT
+                { 
                     morse = mostrar(ruta);
                 }
 
