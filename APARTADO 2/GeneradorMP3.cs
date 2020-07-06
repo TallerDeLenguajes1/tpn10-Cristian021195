@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -27,35 +27,31 @@ namespace MorseSound
             file.Close();
             lectura.Close();
 
+            byte[] punto = File.ReadAllBytes(rutaMP3A);
+            byte[] raya = File.ReadAllBytes(rutaMP3B);
+            byte[] silencio = File.ReadAllBytes(rutaMP3C);
 
             string[] PalabrasMorse = texto.Split('/');
             foreach (string palabraMorse in PalabrasMorse) {
                 char[] letraMorse = palabraMorse.ToCharArray();
 
-                using (FileStream lectura2 = File.OpenWrite(Ruta+Archivo))
+                using (FileStream mp3Stream = File.OpenWrite(Ruta+Archivo))
                 {
                     foreach (char c in letraMorse)
                     {
                         if (c == '.')
                         {
-                            byte[] punto = File.ReadAllBytes(rutaMP3A);
-                            lectura2.Write(punto, 0, punto.Length);
-                            lectura2.Flush();
+                            mp3Stream.Write(punto, 0, punto.Length);
                         }
                         else if (c == '-')
                         {
-                            byte[] raya = File.ReadAllBytes(rutaMP3B);
-                            lectura2.Write(raya, 0, raya.Length);
-                            lectura2.Flush();
+                            mp3Stream.Write(raya, 0, raya.Length);
                         }
                         else {
-                            byte[] silencio = File.ReadAllBytes(rutaMP3C);
-                            lectura2.Write(silencio, 0, silencio.Length);
-                            lectura2.Flush();
+                            mp3Stream.Write(silencio, 0, silencio.Length);
                         }
                     }
-                    
-                    lectura2.Close();
+                    mp3Stream.Close();//no hace falta hacer flush, close mismo lo hace
                 }
 
             }
